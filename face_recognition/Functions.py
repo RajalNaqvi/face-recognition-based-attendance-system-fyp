@@ -7,7 +7,7 @@ from sklearn.preprocessing import Normalizer
 from datetime import datetime
 from keras.models import load_model
 
-# Attendance
+# Attendance[ This Method will be Replaced with dbloolup]
 def attendance(name):
     """
     Mark attendance for a given person.
