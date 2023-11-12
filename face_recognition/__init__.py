@@ -1,3 +1,5 @@
-from face_recognition.Image_recognition import ImageRecognition 
 from face_recognition.train_face_recognition_system import TrainFaceRecognitionSystem 
-import Functions
+from face_recognition.Image_recognition import ImageRecognition 
+from face_recognition.video_based_image_recognition import VideoBasedImageRecognition
+from face_recognition.real_time_recognition import RealTimeRecognition
+import face_recognition.Functions as Functions

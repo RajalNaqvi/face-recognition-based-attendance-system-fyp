@@ -1,5 +1,5 @@
 import cv2
-from Functions import *
+from face_recognition.Functions import *
 import logging
 from face_recognition import ImageRecognition
 
@@ -45,7 +45,7 @@ class VideoBasedImageRecognition:
                 break
             
             # Perform image recognition using the provided recognizer
-            image, _, _ = self.image_recognizer(image)
+            image, _, _ = self.image_recognizer.recognize_image(image)
             frame = cv2.resize(image, self.frame_size, interpolation=cv2.INTER_AREA)
             
             # Write frame to output video if specified
@@ -66,4 +66,4 @@ class VideoBasedImageRecognition:
         # Close all OpenCV windows
         cv2.destroyAllWindows()
         
-        return f"Video recognition complete. Output file is at {self.video_path}."
+        return f"Video recognition complete. Output file is at {self.video_output_path}."

@@ -1,4 +1,3 @@
-import os
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
@@ -155,3 +154,38 @@ def read_vc(vc, func_to_call, break_print=':(', show=False, win_name='', break_k
             cv2.imshow(win_name, frame)
         if cv2.waitKey(1) & 0xff == ord(break_key):
             break
+        
+        
+
+def convert_video_avi(video_file:str,video_file_output:str):
+    # Read the video file
+    cap = cv2.VideoCapture(video_file)
+
+    # Check if the video file is opened successfully
+    if not cap.isOpened():
+        print("Error opening video file")
+    else:
+        # Get the video properties
+        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        fps = cap.get(cv2.CAP_PROP_FPS)
+
+        # MJPEG codec ID (assuming 7 is the MJPEG codec ID)
+        fourcc = cv2.VideoWriter_fourcc(*'MJPG')  # Use 'MJPG' codec
+        
+        # Create an output video file (for testing purposes)
+        out = cv2.VideoWriter(f'{video_file_output}.avi', fourcc, fps, (width, height))
+        
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if ret:
+                # Process the frame (if needed)
+                # Display or write the frame to the output file
+                out.write(frame)
+            else:
+                break
+
+        # Release everything when done
+        cap.release()
+        out.release()
+        cv2.destroyAllWindows()

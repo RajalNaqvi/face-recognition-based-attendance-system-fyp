@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import cv2
-from Functions import get_person_face, get_encoding, save_pickle
+from face_recognition.Functions import get_person_face, get_encoding, save_pickle
 from sklearn.preprocessing import Normalizer
 import logging
 

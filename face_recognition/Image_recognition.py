@@ -1,7 +1,7 @@
 from scipy.spatial.distance import cosine
 import numpy as np
 import cv2
-from Functions import get_person_face, get_encoding, load_pickle, attendance
+from face_recognition.Functions import get_person_face, get_encoding, load_pickle, attendance
 from sklearn.preprocessing import Normalizer
 import logging
 
@@ -55,7 +55,6 @@ class ImageRecognition:
             image_colorspace_converted = cv2.cvtColor(input_image, self.color_space)
             results = self.detector_model.detect_faces(image_colorspace_converted)
             logging.info("Image Recognition in progress...")
-            
             known_faces = list()
             attendance_marked = dict()
             for res in results:
