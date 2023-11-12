@@ -11,7 +11,7 @@ class ImageRecognition:
     Class for recognizing faces in an image.
 
     Args:
-    - encoder_model: Path to the pre-trained face encoder model.
+    - encoder_model (str): Path to the pre-trained face encoder model.
     - detector_model: Face detection model.
     - encodings_path (str): Path to the encodings file.
     - color_space (int, optional): Color space conversion flag (default: cv2.COLOR_BGR2RGB).
@@ -55,7 +55,7 @@ class ImageRecognition:
             image_colorspace_converted = cv2.cvtColor(input_image, self.color_space)
             results = self.detector_model.detect_faces(image_colorspace_converted)
             logging.info("Image Recognition in progress...")
-            
+            known_faces = []
             for res in results:
                 if res['confidence'] < confidence_threshold:
                     continue
@@ -82,14 +82,14 @@ class ImageRecognition:
                 else:
                     cv2.rectangle(input_image, (x1, y1), (x2, y2), (0, 255, 0), 2)
                     cv2.putText(input_image, person_name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+                    known_faces.append(person_name)
                     
                 # writing recognized image on provided path   
                 if output_image_path:
                     logging.info(f"writing output image {output_image_path}")
                     cv2.imwrite(output_image_path, input_image)
-                    
             logging.info("Image Recognition completed successfully..")
-            return input_image, person_name, is_present
+            return input_image, known_faces, is_present
         
         except FileNotFoundError:
             logging.error("Image File Not found.")
