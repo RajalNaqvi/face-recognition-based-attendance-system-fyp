@@ -1,7 +1,7 @@
 from scipy.spatial.distance import cosine
 import numpy as np
 import cv2
-from Functions import get_person_face, get_encoding, load_pickle, attendance
+from face_recognition.Functions import get_person_face, get_encoding, load_pickle, attendance
 from sklearn.preprocessing import Normalizer
 import logging
 
