@@ -11,7 +11,7 @@ class ImageRecognition:
     Class for recognizing faces in an image.
 
     Args:
-    - encoder_model (str): Path to the pre-trained face encoder model.
+    - encoder_model: Path to the pre-trained face encoder model.
     - detector_model: Face detection model.
     - encodings_path (str): Path to the encodings file.
     - color_space (int, optional): Color space conversion flag (default: cv2.COLOR_BGR2RGB).
