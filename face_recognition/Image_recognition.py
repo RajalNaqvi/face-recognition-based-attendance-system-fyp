@@ -43,8 +43,8 @@ class ImageRecognition:
         Returns:
         - Tuple containing:
           - input_image: Input image in OpenCV format.
-          - person_name (str): Recognized person's name.
-          - is_present (str): Attendance status (marked or None).
+          - person_name (list): Recognized person's name.
+          - is_present (dict): Attendance status (marked or None).
         """
         try:
             encoding_dict = load_pickle(self.encodings_path)
@@ -55,7 +55,8 @@ class ImageRecognition:
             image_colorspace_converted = cv2.cvtColor(input_image, self.color_space)
             results = self.detector_model.detect_faces(image_colorspace_converted)
             logging.info("Image Recognition in progress...")
-            known_faces = []
+            known_faces = list()
+            attendance_marked = dict()
             for res in results:
                 if res['confidence'] < confidence_threshold:
                     continue
@@ -83,13 +84,13 @@ class ImageRecognition:
                     cv2.rectangle(input_image, (x1, y1), (x2, y2), (0, 255, 0), 2)
                     cv2.putText(input_image, person_name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
                     known_faces.append(person_name)
-                    
+                    attendance_marked[person_name] = is_present
                 # writing recognized image on provided path   
                 if output_image_path:
                     logging.info(f"writing output image {output_image_path}")
                     cv2.imwrite(output_image_path, input_image)
             logging.info("Image Recognition completed successfully..")
-            return input_image, known_faces, is_present
+            return input_image, known_faces, attendance_marked
         
         except FileNotFoundError:
             logging.error("Image File Not found.")
