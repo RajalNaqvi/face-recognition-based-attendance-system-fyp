@@ -5,6 +5,15 @@ class DBlookup:
         #connectivity mechanism for dblookup
         pass
     
+    def connect_db(self):
+        pass
+    
+    def disconnect_db(self):
+        pass
+    
+    def query_db(self):
+        pass
+    
     def search_class_schedule(self):
         pass
         
