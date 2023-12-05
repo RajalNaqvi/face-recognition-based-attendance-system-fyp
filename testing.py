@@ -4,8 +4,8 @@ import mtcnn
 import logging
 
 detector = mtcnn.MTCNN()
-encoder = load_model('facenet_keras.h5')
-encodings_path = r"C:\Users\my pc\Downloads\FYP (2)\FYP\FYP\Dataset\encodings\2017_SEC_A.pkl"
+encoder = load_model('face_recognition/data/model/facenet_keras.h5')
+encodings_path = r"face_recognition/data/embeddings/encodings.pkl"
 
 #Image Recogonition
 image_recognizer = ImageRecognition(encoder_model=encoder,detector_model=detector,
